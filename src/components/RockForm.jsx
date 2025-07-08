@@ -52,68 +52,79 @@ export const RockForm = ({ fetchRocks }) => {
   }
 
   return (
-    <main className="container--login">
+    <main className="min-h-screen flex items-center justify-center">
       <section>
-        <form className="form--login" onSubmit={() => {}}>
-          <h1 className="text-3xl">Collect a Rock</h1>
-          <fieldset className="mt-4">
-            <label htmlFor="rock">Name:</label>
+        <form
+          onSubmit={collectRock}
+          className="space-y-6 bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+        >
+          <h1 className="text-3xl font-heading text-center">Collect a Rock</h1>
+
+          <div>
+            <label htmlFor="rock" className="block text-sm font-medium text-neutral-700">
+              Name
+            </label>
             <input
               id="rock"
               type="text"
+              value={rock.name}
               onChange={(e) => {
                 const copy = { ...rock }
                 copy.name = e.target.value
                 updateRockProps(copy)
               }}
-              value={rock.name}
-              className="form-control"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary"
             />
-          </fieldset>
-          <fieldset className="mt-4">
-            <label htmlFor="weight">Weight in kg:</label>
+          </div>
+
+          <div>
+            <label htmlFor="weight" className="block text-sm font-medium text-neutral-700">
+              Weight (kg)
+            </label>
             <input
               id="weight"
               type="number"
+              value={rock.weight}
               onChange={(e) => {
                 const copy = { ...rock }
                 copy.weight = e.target.value
                 updateRockProps(copy)
               }}
-              value={rock.weight}
-              className="form-control"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary"
             />
-          </fieldset>
-          <fieldset className="mt-4">
-            <label htmlFor="type"> Type </label>
-            <br />
+          </div>
+
+          <div>
+            <label htmlFor="type" className="block text-sm font-medium text-neutral-700">
+              Type
+            </label>
             <select
               id="type"
-              className="form-control"
+              value={rock.typeId}
               onChange={(e) => {
                 const copy = { ...rock }
                 copy.typeId = parseInt(e.target.value)
                 updateRockProps(copy)
               }}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary"
             >
-              <option value={0}>- Select a type -</option>
+              <option value={0}>Select a type</option>
               {types.map((t) => (
                 <option key={`type-${t.id}`} value={t.id}>
                   {t.label}
                 </option>
               ))}
             </select>
-          </fieldset>
+          </div>
 
-          <fieldset>
+          <div>
             <button
               type="submit"
-              onClick={collectRock}
-              className="button rounded-md bg-blue-700 text-blue-100 p-3 mt-4"
+              className="w-full py-2 px-4 bg-primary text-white rounded-md hover:bg-secondary transition-colors"
             >
               Collect Rock
             </button>
-          </fieldset>
+          </div>
         </form>
       </section>
     </main>

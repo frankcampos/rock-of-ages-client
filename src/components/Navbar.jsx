@@ -1,37 +1,52 @@
 import { NavLink, useNavigate } from "react-router-dom"
-import "./Navbar.css"
 
 export const NavBar = () => {
     const navigate = useNavigate()
     return (
-        <ul className="navbar pb-10">
-            <li className="navbar__item pl-10">
-                <NavLink className="text-left underline text-blue-600 hover:text-purple-700" to={"/allrocks"}>All Rocks</NavLink>
+      <nav className="bg-primary text-white px-6 py-4">
+        <ul className="flex space-x-6 max-w-4xl mx-auto">
+          <li>
+            <NavLink to="/allrocks" className="hover:text-secondary transition-colors">
+              All Rocks
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/create" className="hover:text-secondary transition-colors">
+              Collect a Rock
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/mine" className="hover:text-secondary transition-colors">
+              My Rocks
+            </NavLink>
+          </li>
+          {localStorage.getItem("rock_token") ? (
+            <li>
+              <button
+                className="hover:text-secondary transition-colors"
+                onClick={() => {
+                  localStorage.removeItem("rock_token")
+                  navigate('/login')
+                }}
+              >
+                Logout
+              </button>
             </li>
-            <li className="navbar__item">
-                <NavLink className="text-left underline text-blue-600 hover:text-purple-700" to={"/create"}>Collect a Rock</NavLink>
-            </li>
-            <li className="navbar__item">
-                <NavLink className="text-left underline text-blue-600 hover:text-purple-700" to={"/mine"}>My Rocks</NavLink>
-            </li>
-            {
-                (localStorage.getItem("rock_token") !== null) ?
-                    <li className="navbar__item">
-                        <button className="underline text-blue-600 hover:text-purple-700"
-                            onClick={() => {
-                                localStorage.removeItem("rock_token")
-                                navigate('/login')
-                            }}
-                        >Logout</button>
-                    </li> :
-                    <>
-                        <li className="navbar__item">
-                            <NavLink className="text-left underline text-blue-600 hover:text-purple-700" to={"/login"}>Login</NavLink>
-                        </li>
-                        <li className="navbar__item">
-                            <NavLink className="text-left underline text-blue-600 hover:text-purple-700" to={"/register"}>Register</NavLink>
-                        </li>
-                    </>
-            }        </ul>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/login" className="hover:text-secondary transition-colors">
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/register" className="hover:text-secondary transition-colors">
+                  Register
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
     )
 }

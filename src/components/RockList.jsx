@@ -6,56 +6,46 @@ export const RockList = ({ rocks, fetchRocks, showAll }) => {
     fetchRocks(showAll)
   }, [showAll])
 
-  const displayRocks = () => {
-    if (rocks && rocks.length) {
-      return rocks.map((rock) => (
-        <div
-          key={`key-${rock.id}`}
-          className="border p-5 border-solid
-                           rounded-md border-violet-900 mt-5 bg-slate-50"
-        >
-          <div>
-            {rock.name} ({rock.type.label})
-          </div>
-          <div>
-            In the collection of {rock.user.first_name} {rock.user.last_name}
-          </div>
-          {showAll ? (
-            ""
-          ) : (
-            <div>
-              <button
-                onClick={async () => {
-                  const response = await fetch(`${apiUrl}/rocks/${rock.id}`, {
-                    method: "DELETE",
-                    headers: {
-                      Authorization: `Token ${
-                        JSON.parse(localStorage.getItem("rock_token")).token
-                      }`,
-                    },
-                  })
-
-                  if (response.status === 204) {
-                    fetchRocks(showAll)
-                  }
-                }}
-                className="border border-solid bg-red-700 text-white p-1"
-              >
-                Delete
-              </button>
-            </div>
-          )}
-        </div>
-      ))
-    }
-
-    return <h3>Loading Rocks...</h3>
-  }
-
   return (
-    <>
-      <h1 className="text-3xl">Rock List</h1>
-      {displayRocks()}
-    </>
+    <div className="max-w-4xl mx-auto py-10 px-4 space-y-6">
+      <h1 className="text-3xl font-heading">Rock List</h1>
+      {rocks && rocks.length > 0 ? (
+        <div className="space-y-6">
+          {rocks.map((rock) => (
+            <div key={rock.id} className="bg-white shadow-md rounded-lg p-6">
+              <h3 className="text-xl font-heading">
+                {rock.name} ({rock.type.label})
+              </h3>
+              <p>
+                Owner: {rock.user.first_name} {rock.user.last_name}
+              </p>
+              {!showAll && (
+                <button
+                  onClick={async () => {
+                    const response = await fetch(`${apiUrl}/rocks/${rock.id}`, {
+                      method: 'DELETE',
+                      headers: {
+                        Authorization: `Token ${JSON.parse(
+                          localStorage.getItem('rock_token')
+                        ).token}`,
+                      },
+                    })
+
+                    if (response.status === 204) {
+                      fetchRocks(showAll)
+                    }
+                  }}
+                  className="mt-4 inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Loading Rocks...</p>
+      )}
+    </div>
   )
 }

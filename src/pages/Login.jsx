@@ -1,6 +1,5 @@
 import { useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import "./Login.css"
 
 export const Login = () => {
   const apiUrl = import.meta.env.VITE_API_URL
@@ -30,7 +29,7 @@ export const Login = () => {
   }
 
   return (
-    <main className="container--login">
+    <main className="min-h-screen flex items-center justify-center">
       <dialog className="dialog dialog--auth" ref={existDialog}>
         <div>User does not exist</div>
         <button
@@ -42,53 +41,57 @@ export const Login = () => {
       </dialog>
 
       <section>
-        <form className="form--login" onSubmit={handleLogin}>
-          <h1 className="text-4xl mt-7 mb-3">Rock of Ages</h1>
-          <h2 className="text-xl mb-10">Please sign in</h2>
-          <fieldset className="mb-4">
-            <label htmlFor="inputEmail"> Email address </label>
+        <form
+          onSubmit={handleLogin}
+          className="space-y-6 bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+        >
+          <h1 className="text-3xl font-heading text-center">Rock of Ages</h1>
+          <h2 className="text-lg text-center text-neutral-600">
+            Please sign in
+          </h2>
+          <div>
+            <label htmlFor="inputEmail" className="block text-sm font-medium text-neutral-700">
+              Email address
+            </label>
             <input
               type="email"
               id="inputEmail"
               value={email}
               onChange={(evt) => setEmail(evt.target.value)}
-              className="form-control"
-              placeholder="Email address"
               required
               autoFocus
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary"
+              placeholder="Email address"
             />
-          </fieldset>
-          <fieldset className="mb-4">
-            <label htmlFor="inputPassword"> Password </label>
+          </div>
+          <div>
+            <label htmlFor="inputPassword" className="block text-sm font-medium text-neutral-700">
+              Password
+            </label>
             <input
               type="password"
               id="inputPassword"
               value={password}
               onChange={(evt) => setPassword(evt.target.value)}
-              className="form-control"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary"
               placeholder="Password"
             />
-          </fieldset>
-          <fieldset>
+          </div>
+          <div>
             <button
               type="submit"
-              className="button p-3 rounded-md bg-blue-800 text-blue-100"
+              className="w-full py-2 px-4 bg-primary text-white rounded-md hover:bg-secondary transition-colors"
             >
               Sign in
             </button>
-          </fieldset>
+          </div>
         </form>
-      </section>
-      <div className="loginLinks">
-        <section className="link--register">
-          <Link
-            className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
-            to="/register"
-          >
+        <p className="text-center text-sm mt-4">
+          <Link to="/register" className="underline hover:text-secondary">
             Not a member yet?
           </Link>
-        </section>
-      </div>
+        </p>
+      </section>
     </main>
   )
 }
