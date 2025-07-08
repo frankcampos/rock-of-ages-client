@@ -17,7 +17,7 @@ export const RockList = ({ rocks, fetchRocks, showAll }) => {
                 {rock.name} ({rock.type.label})
               </h3>
               <p>
-                Owner: {rock.user.first_name} {rock.user.last_name}
+                In the collection of {rock.user.first_name} {rock.user.last_name}
               </p>
               {!showAll && (
                 <button

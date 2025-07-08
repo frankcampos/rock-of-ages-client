@@ -62,7 +62,7 @@ export const RockForm = ({ fetchRocks }) => {
 
           <div>
             <label htmlFor="rock" className="block text-sm font-medium text-neutral-700">
-              Name
+              Name:
             </label>
             <input
               id="rock"
@@ -79,7 +79,7 @@ export const RockForm = ({ fetchRocks }) => {
 
           <div>
             <label htmlFor="weight" className="block text-sm font-medium text-neutral-700">
-              Weight (kg)
+              Weight in kg:
             </label>
             <input
               id="weight"
