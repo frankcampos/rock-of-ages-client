@@ -1,5 +1,6 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import "./Auth.css"
 
 export const Login = () => {
   const apiUrl = import.meta.env.VITE_API_URL
@@ -7,6 +8,13 @@ export const Login = () => {
   const [password, setPassword] = useState("")
   const existDialog = useRef()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    document.body.classList.add("auth-page")
+    return () => {
+      document.body.classList.remove("auth-page")
+    }
+  }, [])
 
   const handleLogin = (e) => {
     e.preventDefault()
