@@ -6,7 +6,8 @@ function Home() {
           Welcome to Rock of Ages, Frank
         </h1>
         <p className="text-lg max-w-xl mx-auto">
-          Collect, browse, and manage your favorite rocks from around the world.
+          Collect, browse, and manage your favorite rocks from around the world
+          and the universe.
         </p>
       </section>
       <main className="max-w-4xl mx-auto py-10 px-4">
